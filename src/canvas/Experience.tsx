@@ -1,0 +1,46 @@
+import { Suspense } from "react";
+import { OrbitControls } from "@react-three/drei";
+import Camera from "./Camera";
+import Lights from "./Lights";
+import Computer from "./models/Computer";
+import Environment from "./Environment";
+import Screen from "./models/Screen";
+import ComputerCase from "./models/ComputerCase";
+import KeyBoard from "./models/KeyBoard";
+import { useExperienceStore } from "../core/store";
+import Desk from "./models/Desk";
+
+export default function Experience() {
+  const { mode, setMode } = useExperienceStore();
+
+  const handleClickOutsideScreen = (e: any) => {
+    if (mode === "focus") {
+      e.stopPropagation();
+      setMode("idle");
+    }
+  };
+
+  return (
+    <>
+      <Camera />
+      <OrbitControls
+        enabled={mode !== "focus"}
+        enableDamping
+        dampingFactor={0.05}
+        target={[0, 0.8, 2]}
+      />
+      <Lights />
+      <Environment />
+
+      <Suspense fallback={null}>
+        <group onClick={handleClickOutsideScreen}>
+          <Desk />
+          <Computer />
+          <KeyBoard />
+        </group>
+        <Screen />
+        <ComputerCase />
+      </Suspense>
+    </>
+  );
+}
