@@ -15,7 +15,7 @@ export function IntroScreen() {
       />
 
       <p className="text-white/30 text-xs tracking-[0.2em] uppercase transition-colors duration-300 hover:text-[#ccff00]">
-        Decouvrez l'environnemnt du nouvelle album de Travis Scott
+        Decouvrez l'environnement du nouvel album de Travis Scott
       </p>
 
       {/* Entrer */}
